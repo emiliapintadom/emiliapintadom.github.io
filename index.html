@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emilia Pintado Mariscal</title>
+<meta name="description" content="Writing, research and data work by Emilia Pintado Mariscal: politics, public policy, gender and international affairs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fafaf8; --surface:#ffffff; --ink:#161616; --muted:#5f5f5f; --line:#e2e2de;
+  --accent:#161616; --accent-soft:#efefec; --chip:#efefec; --gold:#5f5f5f;
+  --hero:#fafaf8; --hero-ink:#161616; --hero-muted:#4a4a4a;
+  --t-gender:#efefec; --t-gender-ink:#333; --t-mexico:#efefec; --t-mexico-ink:#333; --t-world:#efefec; --t-world-ink:#333;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121212; --surface:#1b1b1b; --ink:#f0f0ee; --muted:#a8a8a4; --line:#2e2e2e;
+    --accent:#f0f0ee; --accent-soft:#262626; --chip:#262626; --gold:#a8a8a4;
+    --hero:#121212; --hero-ink:#f0f0ee; --hero-muted:#c4c4c0;
+    --t-gender:#262626; --t-gender-ink:#ddd; --t-mexico:#262626; --t-mexico-ink:#ddd; --t-world:#262626; --t-world-ink:#ddd;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121212; --surface:#1b1b1b; --ink:#f0f0ee; --muted:#a8a8a4; --line:#2e2e2e;
+    --accent:#f0f0ee; --accent-soft:#262626; --chip:#262626; --gold:#a8a8a4;
+    --hero:#121212; --hero-ink:#f0f0ee; --hero-muted:#c4c4c0;
+    --t-gender:#262626; --t-gender-ink:#ddd; --t-mexico:#262626; --t-mexico-ink:#ddd; --t-world:#262626; --t-world-ink:#ddd;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+header.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:56px}
+.brand{font-family:"Libre Caslon Text",Georgia,serif;font-weight:600;font-size:18px;text-decoration:none}
+nav.links{display:flex;gap:18px;font-size:14px}
+nav.links a{text-decoration:none;color:var(--muted)}
+nav.links a:hover{color:var(--ink)}
+.controls{display:flex;gap:6px}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 12px;font:500 13px "IBM Plex Sans",sans-serif;cursor:pointer}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.hero{padding:72px 0 40px}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:var(--accent);font-weight:600}
+h1{font-family:"Libre Caslon Text",Georgia,serif;font-weight:400;font-size:clamp(38px,6vw,60px);line-height:1.05;margin:10px 0 16px;letter-spacing:-.01em}
+.lede{font-size:19px;color:var(--muted);max-width:680px;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:24px;font-size:14px}
+.meta a{color:var(--accent);text-decoration:none;font-weight:500}
+section{padding:48px 0;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+h2{font-family:"Libre Caslon Text",Georgia,serif;font-weight:700;font-size:30px;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 24px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:10px;transition:transform .15s,border-color .15s}
+.card:hover{border-color:var(--ink)}
+.card .top{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted)}
+.tag{background:var(--chip);border-radius:999px;padding:2px 10px;font-weight:500}
+.card h3{font-family:"Libre Caslon Text",Georgia,serif;font-weight:700;font-size:20px;line-height:1.25;margin:0}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.card .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;font-size:13px;padding-top:6px}
+.card .foot a{color:var(--accent);font-weight:600;text-decoration:none}
+.card .foot a:hover{text-decoration:underline}
+.pubbox{margin-top:auto;background:var(--ink);color:var(--bg);padding:6px 12px;border-radius:4px;font-size:13px}
+.card .pubbox strong{color:var(--bg)}
+.pubbox + .foot{margin-top:0}
+.lang{font-size:12px;color:var(--muted)}
+.lang strong{color:var(--ink)}
+.soon{font-size:13px;color:var(--muted)}
+pre.snip{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;overflow-x:auto;font:13px/1.5 ui-monospace,Menlo,monospace;margin:12px 0 0}
+.panel a{color:var(--accent);font-weight:600;text-decoration:none}
+.panel ul{margin:10px 0 0;padding-left:1.1em;font-size:15px}
+.data{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:22px}
+.panel h3{font-family:"Libre Caslon Text",Georgia,serif;margin:0 0 8px;font-size:20px}
+.panel p{margin:0;font-size:15px}
+footer{padding:40px 0 60px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+.heroband{background:var(--hero);color:var(--hero-ink);border-bottom:1px solid var(--line)}
+.heroband .hero{padding:64px 0 48px}
+.heroband .eyebrow{color:var(--gold)}
+.heroband .lede{color:var(--hero-muted)}
+.heroband .meta a{color:var(--hero-ink);border-bottom:1px solid var(--ink)}
+.heroband .meta span{color:var(--hero-muted)}
+h2{position:relative;padding-top:14px}
+h2::before{content:"";position:absolute;top:0;left:0;width:40px;height:4px;background:var(--accent)}
+.tag.gender{background:var(--t-gender);color:var(--t-gender-ink)}
+.tag.mexico{background:var(--t-mexico);color:var(--t-mexico-ink)}
+.tag.world{background:var(--t-world);color:var(--t-world-ink)}
+.tag.press{background:var(--accent-soft);color:var(--accent)}
+.card .foot a{color:var(--accent)}
+@media (max-width:700px){[hidden]{display:none!important}
+@media (max-width:700px){
+  nav.links{display:none}
+  .data{grid-template-columns:1fr}
+  .hero{padding:48px 0 28px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">E. Pintado Mariscal</a>
+    <nav class="links">
+      <a href="#journalism" data-en="Journalism" data-es="Periodismo">Journalism</a>
+      <a href="#research" data-en="Research" data-es="Investigación">Research</a>
+      <a href="#data" data-en="Data" data-es="Datos">Data</a>
+    </nav>
+    <div class="controls" role="group" aria-label="Language">
+      <button class="btn" data-set-lang="en" aria-pressed="true">EN</button>
+      <button class="btn" data-set-lang="es" aria-pressed="false">ES</button>
+    </div>
+  </div>
+</header>
+
+<div class="heroband"><div class="wrap">
+  <div class="hero">
+    <div class="eyebrow" data-en="Writer · Data analyst · Researcher" data-es="Escritora · Analista de datos · Investigadora">Writer · Data analyst · Researcher</div>
+    <h1>Emilia Pintado Mariscal</h1>
+    <p class="lede" data-en="Writer and data analyst covering politics, public policy and gender in Mexico. I'm an International Relations student at ITAM and a data analyst at IMCO, a Mexico City think tank, where I build indicators from survey data to explain how people live and work." data-es="Escritora y analista de datos. Escribo sobre política, políticas públicas y género en México. Estudio Relaciones Internacionales en el ITAM y soy analista de datos en el IMCO, un think tank en la Ciudad de México, donde construyo indicadores con datos de encuestas para explicar cómo vive y trabaja la gente.">Writer and data analyst covering politics, public policy and gender in Mexico. I'm an International Relations student at ITAM and a data analyst at IMCO, a Mexico City think tank, where I build indicators from survey data to explain how people live and work.</p>
+    <div class="meta">
+      <a href="mailto:emilia.pintado.m@gmail.com">emilia.pintado.m@gmail.com</a>
+      <a href="https://www.linkedin.com/in/emilia-pintado-mariscal-480bb62b3/" target="_blank" rel="noopener">LinkedIn</a>
+      <span data-en="Spanish · English · French" data-es="Español · Inglés · Francés">Spanish · English · French</span>
+    </div>
+  </div>
+
+</div></div>
+<main class="wrap">
+  <section id="journalism">
+    <h2 data-en="Journalism" data-es="Periodismo">Journalism</h2>
+    <p class="sub" data-en="Explainers, opinion and features published in El Heraldo de México and El Supuesto, ITAM's student newspaper. Written in Spanish." data-es="Explicativos, opinión y crónicas publicados en El Heraldo de México y en El Supuesto, el periódico estudiantil del ITAM.">Explainers, opinion and features published in El Heraldo de México and El Supuesto, ITAM's student newspaper. Written in Spanish.</p>
+    <div class="grid" id="journalism-grid"></div>
+  </section>
+
+  <section id="research">
+    <h2 data-en="Research" data-es="Investigación">Research</h2>
+    <p class="sub" data-en="Academic essays from ITAM, the London School of Economics, Harvard DCE and other programs." data-es="Ensayos académicos del ITAM, la London School of Economics, Harvard DCE y otros programas.">Academic essays from ITAM, the London School of Economics, Harvard DCE and other programs.</p>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="research-grid"></div>
+  </section>
+
+  <section id="data">
+    <h2 data-en="Data work" data-es="Trabajo con datos">Data work</h2>
+    <p class="sub" data-en="At IMCO, the Mexican Institute for Competitiveness, Inclusive Society team." data-es="En el equipo de Sociedad Incluyente del IMCO, el Instituto Mexicano para la Competitividad.">At IMCO, the Mexican Institute for Competitiveness, Inclusive Society team.</p>
+    <div class="data">
+      <div class="panel">
+        <h3 data-en="Women in the Economy monitor: young women in Mexico City" data-es="Monitor Mujeres en la economía: mujeres jóvenes en la CDMX">Women in the Economy monitor: young women in Mexico City</h3>
+        <p data-en="I produced the data for the Mexico City section of IMCO's monitor: I processed INEGI's survey microdata in R and calculated the indicators on young women (15 to 29), for the city, its 16 boroughs and the country."
+           data-es="Generé los datos de la sección de la CDMX del monitor del IMCO: procesé en R los microdatos de encuestas del INEGI y calculé los indicadores sobre mujeres jóvenes (15 a 29 años) para la ciudad, sus 16 alcaldías y el país.">I produced the data for the Mexico City section of IMCO's monitor: I processed INEGI's survey microdata in R and calculated the indicators on young women (15 to 29), for the city, its 16 boroughs and the country.</p>
+        <ul>
+          <li data-en="Labor participation, informality, entrepreneurs, NEET rate" data-es="Participación laboral, informalidad, emprendedoras, ninis">Labor participation, informality, entrepreneurs, NEET rate</li>
+          <li data-en="Working hours and hours of unpaid housework" data-es="Horas de trabajo y horas de quehaceres no remunerados">Working hours and hours of unpaid housework</li>
+          <li data-en="Every estimate with its standard error, checked against the previous year" data-es="Cada estimación con su error estándar, revisada contra el año anterior">Every estimate with its standard error, checked against the previous year</li>
+        </ul>
+        <p style="margin-top:12px"><a href="https://imco.org.mx/monitor/mujeres-en-la-economia/?tab=cdmx" target="_blank" rel="noopener" data-en="See the monitor ↗" data-es="Ver el monitor ↗">See the monitor ↗</a></p>
+      </div>
+      <div class="panel">
+        <h3 data-en="How I work in R" data-es="Cómo trabajo en R">How I work in R</h3>
+        <p data-en="A full script from the monitor: it joins two tables of INEGI's employment survey (ENOE), sets up the survey design, and estimates the weekly hours of housework of employed young women, with standard errors and a check of which borough estimates are precise enough to publish."
+           data-es="Un script completo del monitor: une dos tablas de la ENOE del INEGI, arma el diseño muestral y estima las horas a la semana de quehaceres de las mujeres jóvenes ocupadas, con errores estándar y una revisión de qué estimaciones por alcaldía son publicables.">A full script from the monitor: it joins two tables of INEGI's employment survey (ENOE), sets up the survey design, and estimates the weekly hours of housework of employed young women, with standard errors and a check of which borough estimates are precise enough to publish.</p>
+<pre class="snip">sdem_filtered %&gt;%
+  split(.$TRIMESTRE) %&gt;%
+  map(disenar)   # one survey design per quarter</pre>
+        <p style="margin-top:12px"><a href="code/horas-quehaceres.html" data-en="Read the code →" data-es="Ver el código →">Read the code →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Emilia Pintado Mariscal</p>
+  </footer>
+</main>
+
+<script>
+// Each piece opens its own page under writing/, unless it only lives on an outside site (external).
+const ES = 'https://blog.elsupuesto.com';
+
+const journalism = [
+  {title:'Orgullo Rarámuri en el Maratón de la CDMX 2025', date:'2025-09', url:'https://heraldodemexico.com.mx/tendencias/2025/9/12/orgullo-raramuri-en-el-maraton-de-la-cdmx-2025-729632.html', outlet:'El Heraldo de México', highlight:true, external:true, tag:{en:'Sports',es:'Deportes'},
+   en:'A feature on the Rarámuri runners who competed in the 2025 Mexico City Marathon.',
+   es:'Una crónica sobre los corredores rarámuri que participaron en el Maratón de la Ciudad de México 2025.'},
+  {title:'La economía detrás del trabajo doméstico', date:'2026-11', url:'writing/economia-trabajo-domestico.html', outlet:'El Supuesto', tag:{en:'Economy',es:'Economía'},
+   en:'Unpaid domestic and care work was worth 23.9% of Mexico’s GDP in 2024, 72.6% of it produced by women. An explainer on how INEGI puts a price on it, and on the Supreme Court ruling that counts it in divorce settlements.',
+   es:'El trabajo doméstico y de cuidados no remunerado equivalió al 23.9% del PIB en 2024, y las mujeres generaron el 72.6%. Un explicativo sobre cómo lo valora el INEGI y sobre el criterio de la Suprema Corte que lo cuenta en los divorcios.'},
+  {title:'Jóvenes: no dejemos que el gobierno nos silencie', date:'2025-11', url:'writing/jovenes-no-dejemos-que-nos-silencien.html', outlet:'El Supuesto', tag:{en:'Opinion',es:'Opinión'},
+   en:'A call for young people to stay politically engaged, starting from Francisco Suárez Dávila’s diagnosis of a Mexican state “sick with metastatic cancer.”',
+   es:'Un llamado a que los jóvenes sigan participando en la vida política, a partir del diagnóstico de Francisco Suárez Dávila sobre un Estado mexicano “con cáncer con metástasis extendida”.'},
+  {title:'El silencio de Sheinbaum: ¿diplomacia o complicidad?', date:'2025-10', url:ES+'/nacional/2025/10/el-silencio-de-sheinbaum-diplomacia-o-complicidad/', outlet:'El Supuesto', external:true, tag:{en:'Foreign policy',es:'Política exterior'},
+   en:'On the Mexican president’s silence on international issues, and whether it is diplomacy or complicity.',
+   es:'Sobre el silencio de la presidenta ante temas internacionales: ¿diplomacia o complicidad?'},
+  {title:'¿Qué es el huachicol fiscal? El problema de corrupción más grande de México', date:'2025-09', url:'writing/huachicol-fiscal.html', outlet:'El Supuesto', tag:{en:'Corruption',es:'Corrupción'},
+   en:'An explainer on fiscal fuel smuggling: how falsified invoices, customs classifications and import permits let fuel into Mexico tax-free.',
+   es:'Un explicativo sobre el huachicol fiscal: cómo facturas, clasificaciones aduaneras y permisos de importación manipulados meten combustible al país sin pagar impuestos.'},
+];
+
+const research = [
+  {title:'Who Speaks for Arab Women? Gender, Power and Representation', date:'2026-04', lang:'EN', url:'writing/gender-politics-arab-world.html', cat:'gender',
+   en:'How representations of Arab and Muslim women have been shaped by colonial discourse, political agendas and competing feminisms, through debates on Orientalism, colonial feminism and intersectionality.',
+   es:'Cómo las representaciones de las mujeres árabes y musulmanas han sido moldeadas por el discurso colonial, agendas políticas y feminismos en disputa, a través de los debates sobre orientalismo, feminismo colonial e interseccionalidad.'},
+  {title:'Gender as a Mechanism of Power: Women in Palestine', date:'2026-05', lang:'EN', url:'writing/gender-power-women-palestine.html', cat:'gender',
+   en:'Palestinian women sustained the First Intifada’s political networks, then were left out of the Palestinian Authority. The essay traces that exclusion as a pattern in Palestinian politics since the 1920s.',
+   es:'Las mujeres palestinas sostuvieron las redes políticas de la Primera Intifada y luego quedaron fuera de la Autoridad Palestina. El ensayo rastrea esa exclusión como un patrón en la política palestina desde los años veinte.'},
+  {title:'El dilema estructural de la política exterior mexicana: soberanía vs. derechos humanos', date:'2025', lang:'ES', url:'writing/dilema-politica-exterior-mexicana.html', cat:'mexico',
+   en:'The tension between Mexico’s constitutional principles of non-intervention and the promotion of human rights, and how its foreign policy has handled it. ITAM, Legal Foundations Seminar.',
+   es:'La tensión entre los principios constitucionales de no intervención y de promoción de los derechos humanos, y cómo la ha resuelto la política exterior mexicana. ITAM, Seminario de Fundamentos Jurídicos.'},
+  {title:'Hacia un derecho mexicano de relaciones exteriores', date:'2025', lang:'ES', url:'writing/derecho-relaciones-exteriores.html', cat:'mexico',
+   en:'Should foreign relations law be its own legal discipline in Mexico? An argument for treating it as one. ITAM, Legal Foundations Seminar.',
+   es:'¿Debe el derecho de las relaciones exteriores ser una disciplina jurídica autónoma en México? ITAM, Seminario de Fundamentos Jurídicos.'},
+  {title:'Misread Ambitions: Reframing China’s Rise in the International System', date:'2025', lang:'EN', url:'writing/misread-ambitions-china.html', cat:'world',
+   en:'Is China’s assertiveness under Xi Jinping expansionist ambition, or a defensive posture over sovereignty? Harvard DCE, Power and Politics in Greater China.',
+   es:'¿La firmeza de China bajo Xi Jinping es ambición expansionista o una postura defensiva de su soberanía? Harvard DCE, Power and Politics in Greater China.'},
+  {title:'How Saudi Arabia Uses Sportswashing to Promote or Hide Its Political Agenda', date:'2024', lang:'EN', url:'writing/saudi-arabia-sportswashing.html', cat:'world',
+   en:'How mass sporting events and investments serve Saudi Arabia’s political agenda. ITAM, Research Methods in International Relations.',
+   es:'Cómo los grandes eventos deportivos y las inversiones sirven a la agenda política de Arabia Saudita. ITAM, Métodos de Investigación en Relaciones Internacionales.'},
+  {title:'Fragmented Foundations: The Enduring Instability of the Middle East’s State System', date:'2024', lang:'EN', url:'writing/fragmented-foundations-middle-east.html', cat:'world',
+   en:'Was the state system that emerged in the Middle East after the interwar period inherently unstable? London School of Economics, Power and Conflict in the Middle East.',
+   es:'¿Era inestable desde su origen el sistema de Estados que surgió en Medio Oriente tras el periodo de entreguerras? London School of Economics, Power and Conflict in the Middle East.'},
+  {title:'El rol de México en el Pacto Mundial para la Migración Segura, Ordenada y Regular', date:'2023', lang:'ES', url:'writing/mexico-pacto-mundial-migracion.html', cat:'mexico',
+   en:'Mexico’s role in the 2018 UN Global Compact for Migration, the first UN agreement covering international migration in all its dimensions. ITAM, Introduction to International Relations.',
+   es:'El papel de México en el Pacto Mundial para la Migración de la ONU de 2018, el primer acuerdo que aborda la migración internacional en todas sus dimensiones. ITAM, Introducción a las Relaciones Internacionales.'},
+];
+
+const cats = {all:{en:'All',es:'Todo'}, gender:{en:'Gender',es:'Género'}, mexico:{en:'Mexico',es:'México'}, world:{en:'World',es:'Mundo'}};
+const months = {en:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'], es:['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic']};
+const ui = {read:{en:'Read →',es:'Leer →'}, readAt:{en:'Read',es:'Leer'}, soon:{en:'Coming soon',es:'Próximamente'}, pubIn:{en:'Published in',es:'Publicado en'}, featured:{en:'Published in',es:'Publicado en'}, on:{en:'on',es:'en'}, inES:{en:'In Spanish',es:'En español'}, inEN:{en:'In English',es:'En inglés'}};
+
+let lang = 'en', cat = 'all';
+try { const saved = localStorage.getItem('lang'); if (saved === 'es' || saved === 'en') lang = saved; } catch (e) {}
+
+const fmt = d => { const [y,m] = d.split('-'); return m ? `${months[lang][+m-1]} ${y}` : y; };
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function card(p, label){
+  const langNote = p.highlight ? '' : p.outlet ? `${ui.pubIn[lang]} <strong>${esc(p.outlet)}</strong>`
+    : p.lang ? (p.lang === 'ES' ? ui.inES[lang] : ui.inEN[lang]) : '';
+  const link = !p.url ? `<span class="soon">${ui.soon[lang]}</span>`
+    : p.external ? `<a href="${p.url}" target="_blank" rel="noopener">${ui.readAt[lang]} ↗</a>`
+    : `<a href="${p.url}">${ui.read[lang]}</a>`;
+  return `<article class="card">
+    <div class="top"><span class="tag ${p.cat || 'press'}">${esc(label)}</span><span>${fmt(p.date)}</span></div>
+    <h3>${esc(p.title)}</h3>
+    <p>${esc(p[lang])}</p>
+    ${p.highlight ? `<div class="pubbox">${ui.pubIn[lang]} <strong>${esc(p.outlet)}</strong></div>` : ''}
+    <div class="foot"><span class="lang">${langNote}</span>${link}</div>
+  </article>`;
+}
+
+function render(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-en]').forEach(el => { el.textContent = el.dataset[lang]; });
+  document.querySelectorAll('[data-set-lang]').forEach(b => b.setAttribute('aria-pressed', b.dataset.setLang === lang));
+  document.getElementById('journalism-grid').innerHTML = journalism.map(p => card(p, p.tag[lang])).join('');
+  document.getElementById('filters').innerHTML = Object.entries(cats).map(([k,v]) =>
+    `<button class="btn" data-cat="${k}" aria-pressed="${k===cat}">${v[lang]}</button>`).join('');
+  document.getElementById('research-grid').innerHTML = research.filter(p => cat === 'all' || p.cat === cat)
+    .map(p => card(p, cats[p.cat][lang])).join('');
+}
+
+document.addEventListener('click', e => {
+  const l = e.target.closest('[data-set-lang]');
+  if (l) { lang = l.dataset.setLang; try { localStorage.setItem('lang', lang); } catch (err) {} render(); }
+  const c = e.target.closest('[data-cat]');
+  if (c) { cat = c.dataset.cat; render(); }
+});
+render();
+</script>
+</body>
+</html>

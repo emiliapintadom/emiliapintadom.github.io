@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>R code: housework hours · Emilia Pintado Mariscal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" media="(prefers-color-scheme: dark)">
+<style>
+.wrap.article{max-width:880px}
+pre.code{margin:28px 0 48px;border:1px solid var(--line);border-radius:12px;overflow-x:auto;font:13.5px/1.55 ui-monospace,Menlo,monospace}
+pre.code code.hljs{padding:18px;background:var(--surface)}
+.steps{font-size:16px;margin:24px 0 0;padding-left:1.2em}
+.steps li{margin-bottom:6px}
+</style>
+</head>
+<body data-orig="es">
+<header class="top">
+  <div class="wrap">
+    <a class="back" href="../index.html#data" data-en="← Back" data-es="← Volver">← Back</a>
+    <div class="controls" role="group" aria-label="Language">
+      <button class="btn" data-set-lang="en" aria-pressed="true">EN</button>
+      <button class="btn" data-set-lang="es" aria-pressed="false">ES</button>
+    </div>
+  </div>
+</header>
+<main class="wrap article">
+  <p class="eyebrow"><span data-en="R · IMCO Women in the Economy monitor" data-es="R · Monitor Mujeres en la economía del IMCO">R · IMCO Women in the Economy monitor</span></p>
+  <h1 data-en="Weekly hours of housework, young employed women in Mexico City" data-es="Horas a la semana en quehaceres, mujeres jóvenes ocupadas en la CDMX">Weekly hours of housework, young employed women in Mexico City</h1>
+  <div class="byline"><span>Emilia Pintado Mariscal</span><span>2025</span><span>R · survey · srvyr · dplyr · purrr</span></div>
+  <ol class="steps">
+    <li data-en="Reads the four 2025 quarters of INEGI's employment survey (ENOE) and joins the sociodemographic table with the employment questionnaire, one-to-one." data-es="Lee los cuatro trimestres de 2025 de la ENOE del INEGI y une la tabla sociodemográfica con el cuestionario de empleo, uno a uno.">Reads the four 2025 quarters of INEGI's employment survey (ENOE) and joins the sociodemographic table with the employment questionnaire, one-to-one.</li>
+    <li data-en="Handles changes between quarters: renamed geographic variables and a question numbered differently in the first quarter." data-es="Resuelve los cambios entre trimestres: variables geográficas renombradas y una pregunta con otro número en el primer trimestre.">Handles changes between quarters: renamed geographic variables and a question numbered differently in the first quarter.</li>
+    <li data-en="Builds one survey design per quarter (clusters, strata, weights) and averages the four estimates, combining their standard errors." data-es="Arma un diseño muestral por trimestre (conglomerados, estratos, factores) y promedia las cuatro estimaciones, combinando sus errores estándar.">Builds one survey design per quarter (clusters, strata, weights) and averages the four estimates, combining their standard errors.</li>
+    <li data-en="Estimates for Mexico City, its 16 boroughs and the country, and flags borough figures whose coefficient of variation makes them unpublishable." data-es="Estima para la CDMX, sus 16 alcaldías y el país, y marca las cifras por alcaldía cuyo coeficiente de variación las hace no publicables.">Estimates for Mexico City, its 16 boroughs and the country, and flags borough figures whose coefficient of variation makes them unpublishable.</li>
+  </ol>
+  <pre class="code"><code class="language-r"># =============================================================================
+# == HORAS A LA SEMANA EN QUEHACERES DOMÉSTICOS — mujeres ocupadas de 15 a 29 años - ENOE ==
+# =============================================================================
+
+library(survey)
+library(dplyr)
+library(srvyr)
+library(purrr)
+
+# PARÁMETROS
+
+enoe_dir   &lt;- &quot;datos/ENOE&quot;
+out_dir    &lt;- &quot;resultados&quot;
+trimestres &lt;- c(&quot;T125&quot;, &quot;T225&quot;, &quot;T325&quot;, &quot;T425&quot;)
+
+# Llaves para unir SDEMT (tabla sociodemográfica) con COE2T (ocupación y empleo)
+llaves &lt;- c(&quot;tipo&quot;, &quot;mes_cal&quot;, &quot;cd_a&quot;, &quot;ent&quot;, &quot;con&quot;, &quot;v_sel&quot;, &quot;n_hog&quot;, &quot;h_mud&quot;, &quot;n_ren&quot;)
+
+# LECTURA DE MICRODATOS
+
+# Función para cargar y preparar cada base (SDEMT + COE2T del mismo trimestre)
+cargar_trimestre &lt;- function(tri) {
+  path      &lt;- file.path(enoe_dir, tri, paste0(&quot;ENOE_SDEM&quot;, tri, &quot;.csv&quot;))
+  path_coe2 &lt;- file.path(enoe_dir, tri, paste0(&quot;ENOE_COE2&quot;, tri, &quot;.csv&quot;))
+
+  df   &lt;- read.csv(path)
+  coe2 &lt;- read.csv(path_coe2)
+  names(coe2) &lt;- tolower(names(coe2))
+
+  # A partir del 3T2025 se renombraron las variables geográficas cve_
+  if (&quot;cve_ent&quot; %in% names(df)) {
+    df &lt;- df %&gt;%
+      rename(ent = cve_ent, mun = cve_mun, loc = cve_loc, ageb = cve_ageb)
+  }
+  if (&quot;cve_ent&quot; %in% names(coe2)) {
+    coe2 &lt;- coe2 %&gt;%
+      rename(ent = cve_ent)
+  }
+
+  # La pregunta de actividades sin pago se llama p11 en el 1er trimestre y p9 en los demás, aquí le pongo p9 a todas.
+  # Opción 7 = quehaceres de su hogar: p9_7 (lo reportó), p9_h7 (horas), p9_m7 (minutos)
+  if (&quot;p11_7&quot; %in% names(coe2)) {
+    coe2 &lt;- coe2 %&gt;%
+      select(all_of(llaves), p11_7, p11_h7, p11_m7) %&gt;%
+      rename(p9_7 = p11_7, p9_h7 = p11_h7, p9_m7 = p11_m7)
+  } else {
+    coe2 &lt;- coe2 %&gt;%
+      select(all_of(llaves), p9_7, p9_h7, p9_m7)
+  }
+
+  # Verificar que cada persona aparezca en las dos tablas
+  coe2 &lt;- coe2 %&gt;%
+    mutate(en_coe2 = TRUE)
+
+  df &lt;- df %&gt;%
+    left_join(coe2, by = llaves, relationship = &quot;one-to-one&quot;) %&gt;%
+    mutate(
+      eda       = as.numeric(eda),
+      c_res     = as.numeric(c_res),
+      TRIMESTRE = tri
+    )
+
+  return(df)
+}
+
+# Leer y concatenar todas las bases
+sdem_todos &lt;- map_dfr(trimestres, cargar_trimestre)
+
+# Horas a la semana en quehaceres
+# 98 y 99 en p9_h7 son códigos de no sabe / no especificado, no horas: quedan como NA
+sdem_todos &lt;- sdem_todos %&gt;%
+  mutate(
+    quehaceres     = !is.na(p9_7),
+    hrs_quehaceres = ifelse(p9_h7 %in% c(98, 99), NA, p9_h7 + p9_m7 / 60)
+  )
+
+# DISEÑO MUESTRAL
+
+options(survey.lonely.psu = &quot;adjust&quot;)
+
+# Filtrar población
+sdem_filtered &lt;- sdem_todos %&gt;%
+  filter(
+    r_def  == 0,
+    clase2 == 1,            # ocupadas
+    eda &gt;= 15 &amp; eda &lt;= 29,
+    c_res %in% c(1, 3),
+    ent == 9
+  )
+
+# Población nacional (mismo filtro de ocupación/edad, sin restringir a ent == 9)
+sdem_filtered_nacional &lt;- sdem_todos %&gt;%
+  filter(
+    r_def  == 0,
+    clase2 == 1,
+    eda &gt;= 15 &amp; eda &lt;= 29,
+    c_res %in% c(1, 3)
+  )
+
+# Un diseño muestral por trimestre, con el fac_tri original (sin dividir)
+disenar &lt;- function(df) {
+  df %&gt;%
+    as_survey_design(
+      ids     = upm,
+      strata  = est_d_tri,
+      nest    = TRUE,
+      weights = fac_tri
+    )
+}
+
+sdemsvy_tri          &lt;- sdem_filtered          %&gt;% split(.$TRIMESTRE) %&gt;% map(disenar)
+sdemsvy_tri_nacional &lt;- sdem_filtered_nacional %&gt;% split(.$TRIMESTRE) %&gt;% map(disenar)
+
+# Promedio anual: cada trimestre se estima por separado, se divide entre 4 y
+# después se suman. El error estándar se combina suponiendo trimestres
+# independientes: sqrt(sum(se^2)) / 4
+anual &lt;- function(disenos, nombre, estimar, grupos = character()) {
+  res &lt;- map_dfr(disenos, estimar, .id = &quot;TRIMESTRE&quot;) %&gt;%
+    group_by(across(all_of(grupos))) %&gt;%
+    summarise(
+      est    = sum(est / 4),
+      est_se = sqrt(sum((est_se / 4)^2)),
+      n_tri  = n(),
+      .groups = &quot;drop&quot;
+    )
+  if (any(res$n_tri &lt; 4)) warning(nombre, &quot;: algún grupo no aparece en los 4 trimestres&quot;)
+  res %&gt;%
+    select(-n_tri) %&gt;%
+    rename(!!nombre := est, !!paste0(nombre, &quot;_se&quot;) := est_se)
+}
+
+# TABLAS DINÁMICAS
+
+# Horas promedio en quehaceres de las mujeres ocupadas que los hacen, CDMX
+Hrs_quehaceres &lt;- anual(sdemsvy_tri, &quot;hrs_quehaceres&quot;, function(d) d %&gt;%
+  filter(sex == 2, quehaceres) %&gt;%
+  summarise(est = survey_mean(hrs_quehaceres, na.rm = TRUE)))
+
+# NACIONAL
+
+Hrs_quehaceres_nacional &lt;- anual(sdemsvy_tri_nacional, &quot;hrs_quehaceres&quot;, function(d) d %&gt;%
+  filter(sex == 2, quehaceres) %&gt;%
+  summarise(est = survey_mean(hrs_quehaceres, na.rm = TRUE)))
+
+# ALCALDÍAS
+
+# Catálogo de alcaldías (clave `mun` del ENOE para CDMX)
+alcaldias_cdmx &lt;- c(
+  `2`  = &quot;Azcapotzalco&quot;,
+  `3`  = &quot;Coyoacán&quot;,
+  `4`  = &quot;Cuajimalpa de Morelos&quot;,
+  `5`  = &quot;Gustavo A. Madero&quot;,
+  `6`  = &quot;Iztacalco&quot;,
+  `7`  = &quot;Iztapalapa&quot;,
+  `8`  = &quot;La Magdalena Contreras&quot;,
+  `9`  = &quot;Milpa Alta&quot;,
+  `10` = &quot;Álvaro Obregón&quot;,
+  `11` = &quot;Tláhuac&quot;,
+  `12` = &quot;Tlalpan&quot;,
+  `13` = &quot;Xochimilco&quot;,
+  `14` = &quot;Benito Juárez&quot;,
+  `15` = &quot;Cuauhtémoc&quot;,
+  `16` = &quot;Miguel Hidalgo&quot;,
+  `17` = &quot;Venustiano Carranza&quot;
+)
+
+Hrs_quehaceres_x_alcaldia &lt;- anual(sdemsvy_tri, &quot;hrs_quehaceres&quot;, grupos = &quot;mun&quot;, function(d) d %&gt;%
+  filter(sex == 2, quehaceres) %&gt;%
+  group_by(mun) %&gt;%
+  summarise(est = survey_mean(hrs_quehaceres, na.rm = TRUE))) %&gt;%
+  mutate(alcaldia = alcaldias_cdmx[as.character(mun)]) %&gt;%
+  relocate(alcaldia, .after = mun)
+
+# REVISIÓN EN CONSOLA (no se exporta)
+
+# Registros del universo sin par en COE2T, por trimestre (debe salir 0)
+print(sdem_filtered %&gt;%
+        group_by(TRIMESTRE) %&gt;%
+        summarise(sin_coe2 = sum(is.na(en_coe2))))
+
+# Horas promedio, error estándar, CV y observaciones sin ponderar, CDMX
+# n_num: ocupadas que hacen quehaceres con horas válidas; n_den: todas las ocupadas
+# n_codigo: reportaron quehaceres pero con 98/99 en horas (quedan fuera del promedio)
+Hrs_quehaceres_rev &lt;- sdem_filtered %&gt;%
+  filter(sex == 2) %&gt;%
+  summarise(
+    n_num    = sum(quehaceres &amp; !is.na(hrs_quehaceres)),
+    n_den    = n(),
+    n_codigo = sum(quehaceres &amp; is.na(hrs_quehaceres))
+  )
+
+# CV del promedio anual (error estándar combinado entre el promedio)
+Hrs_quehaceres_cv &lt;- Hrs_quehaceres %&gt;%
+  mutate(hrs_quehaceres_cv = hrs_quehaceres_se / hrs_quehaceres)
+
+print(cbind(Hrs_quehaceres_cv, Hrs_quehaceres_rev))
+if (Hrs_quehaceres_cv$hrs_quehaceres_cv * 100 &gt; 30) {
+  cat(&quot;OJO: CV mayor a 30%, no publicable\n&quot;)
+} else if (Hrs_quehaceres_cv$hrs_quehaceres_cv * 100 &gt; 15) {
+  cat(&quot;OJO: CV entre 15% y 30%, precisión moderada\n&quot;)
+}
+
+# Lo mismo por alcaldía
+Hrs_quehaceres_n_mun &lt;- sdem_filtered %&gt;%
+  filter(sex == 2, quehaceres) %&gt;%
+  group_by(mun) %&gt;%
+  summarise(n = sum(!is.na(hrs_quehaceres)))
+
+Hrs_quehaceres_cv_mun &lt;- Hrs_quehaceres_x_alcaldia %&gt;%
+  left_join(Hrs_quehaceres_n_mun, by = &quot;mun&quot;) %&gt;%
+  mutate(hrs_quehaceres_cv = hrs_quehaceres_se / hrs_quehaceres * 100,
+         precision = case_when(hrs_quehaceres_cv &gt; 30 ~ &quot;No publicable&quot;,
+                               hrs_quehaceres_cv &gt; 15 ~ &quot;Moderada&quot;,
+                               TRUE               ~ &quot;Buena&quot;))
+
+print(Hrs_quehaceres_cv_mun, n = 16)
+
+# GUARDAR RESULTADOS
+
+write.csv(
+  Hrs_quehaceres,
+  file = file.path(out_dir, &quot;hrs_quehaceres_CDMX_2025.csv&quot;),
+  row.names = FALSE
+)
+
+write.csv(
+  Hrs_quehaceres_x_alcaldia,
+  file = file.path(out_dir, &quot;hrs_quehaceres_x_alcaldia_2025.csv&quot;),
+  row.names = FALSE
+)
+
+write.csv(
+  Hrs_quehaceres_nacional,
+  file = file.path(out_dir, &quot;hrs_quehaceres_nacional_2025.csv&quot;),
+  row.names = FALSE
+)
+</code></pre>
+</main>
+<footer class="wrap"><a href="../index.html#data" data-en="← Back to data work" data-es="← Volver a trabajo con datos">← Back to data work</a></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/r.min.js"></script>
+<script>
+hljs.highlightAll();
+(function(){
+  let lang='en'; try{const s=localStorage.getItem('lang'); if(s==='es'||s==='en') lang=s;}catch(e){}
+  function render(){
+    document.documentElement.lang=lang;
+    document.querySelectorAll('[data-en]').forEach(el=>{el.textContent=el.dataset[lang];});
+    document.querySelectorAll('[data-set-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.setLang===lang));
+  }
+  document.addEventListener('click',e=>{const l=e.target.closest('[data-set-lang]'); if(!l) return; lang=l.dataset.setLang; try{localStorage.setItem('lang',lang);}catch(err){} render();});
+  render();
+})();
+</script>
+</body>
+</html>
