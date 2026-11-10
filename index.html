@@ -74,6 +74,7 @@ pre.snip{background:var(--surface);border:1px solid var(--line);border-radius:12
 .panel a{color:var(--accent);font-weight:600;text-decoration:none}
 .panel ul{margin:10px 0 0;padding-left:1.1em;font-size:15px}
 .data{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.data .panel.wide{grid-column:1/-1}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:22px}
 .panel h3{font-family:"Libre Caslon Text",Georgia,serif;margin:0 0 8px;font-size:20px}
 .panel p{margin:0;font-size:15px}
@@ -144,8 +145,14 @@ h2::before{content:"";position:absolute;top:0;left:0;width:40px;height:4px;backg
 
   <section id="data">
     <h2 data-en="Data work" data-es="Trabajo con datos">Data work</h2>
-    <p class="sub" data-en="At IMCO, the Mexican Institute for Competitiveness, Inclusive Society team." data-es="En el equipo de Sociedad Incluyente del IMCO, el Instituto Mexicano para la Competitividad.">At IMCO, the Mexican Institute for Competitiveness, Inclusive Society team.</p>
+    <p class="sub" data-en="Election analysis in R, and my work at IMCO, the Mexican Institute for Competitiveness, Inclusive Society team." data-es="Análisis electoral en R y mi trabajo en el equipo de Sociedad Incluyente del IMCO, el Instituto Mexicano para la Competitividad.">Election analysis in R, and my work at IMCO, the Mexican Institute for Competitiveness, Inclusive Society team.</p>
     <div class="data">
+      <div class="panel wide">
+        <h3 data-en="The 2024 election if only one group had voted" data-es="La elección de 2024 si solo hubiera votado un grupo">The 2024 election if only one group had voted</h3>
+        <p data-en="Using the 2024 Cooperative Election Study (60,000 respondents), I estimated how white voters with and without a degree, $100K+ earners, Latino and Black voters voted in every state, and who would have won the Electoral College if only each group had voted. States where the lead is not significant or the sample is too small are flagged, not guessed."
+           data-es="Con el Cooperative Election Study 2024 (60,000 entrevistas) estimé cómo votaron en cada estado los votantes blancos con y sin título, quienes ganan más de $100k, latinos y negros, y quién habría ganado el Colegio Electoral si solo votara cada grupo. Los estados con ventaja no significativa o muestra muy chica se marcan, no se adivinan.">Using the 2024 Cooperative Election Study (60,000 respondents), I estimated how white voters with and without a degree, $100K+ earners, Latino and Black voters voted in every state, and who would have won the Electoral College if only each group had voted. States where the lead is not significant or the sample is too small are flagged, not guessed.</p>
+        <p style="margin-top:12px"><a href="code/if-only-2024.html" data-en="See the maps and code →" data-es="Ver los mapas y el código →">See the maps and code →</a></p>
+      </div>
       <div class="panel">
         <h3 data-en="Women in the Economy monitor: young women in Mexico City" data-es="Monitor Mujeres en la economía: mujeres jóvenes en la CDMX">Women in the Economy monitor: young women in Mexico City</h3>
         <p data-en="I produced the data for the Mexico City section of IMCO's monitor: I processed INEGI's survey microdata in R and calculated the indicators on young women (15 to 29), for the city, its 16 boroughs and the country."
