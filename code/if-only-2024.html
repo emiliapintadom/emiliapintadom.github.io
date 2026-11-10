@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>If Only They Voted · Emilia Pintado Mariscal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../article.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" media="(prefers-color-scheme: dark)">
+<style>
+.wrap.article{max-width:880px}
+pre.code{margin:28px 0 48px;border:1px solid var(--line);border-radius:12px;overflow-x:auto;font:13.5px/1.55 ui-monospace,Menlo,monospace}
+pre.code code.hljs{padding:18px;background:var(--surface)}
+.steps{font-size:16px;margin:24px 0 0;padding-left:1.2em}
+.steps li{margin-bottom:6px}
+.maps{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0}
+.maps figure{margin:0}.maps img{width:100%;height:auto;border-radius:8px;display:block}
+.maps figcaption{font-size:14px;color:var(--muted);margin-top:6px}
+table.ev{border-collapse:collapse;width:100%;font-size:15px;margin:20px 0 8px}
+table.ev th,table.ev td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:right}
+table.ev th:first-child,table.ev td:first-child{text-align:left}
+.note{font-size:14px;color:var(--muted)}
+@media(max-width:640px){.maps{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-orig="en">
+<header class="top">
+  <div class="wrap">
+    <a class="back" href="../index.html#data" data-en="← Back" data-es="← Volver">← Back</a>
+    <div class="controls" role="group" aria-label="Language">
+      <button class="btn" data-set-lang="en" aria-pressed="true">EN</button>
+      <button class="btn" data-set-lang="es" aria-pressed="false">ES</button>
+    </div>
+  </div>
+</header>
+<main class="wrap article">
+  <p class="eyebrow"><span data-en="Election analysis · R" data-es="Análisis electoral · R">Election analysis · R</span></p>
+  <h1 data-en="The 2024 Election If Only One Group Had Voted" data-es="La elección de 2024 si solo hubiera votado un grupo">The 2024 Election If Only One Group Had Voted</h1>
+  <div class="byline"><span>Emilia Pintado Mariscal</span><span>2026</span><span>R · dplyr · ggplot2 · CES 2024</span></div>
+  <p data-en="Who would have won the presidency in 2024 if only white college graduates had voted? Or only Latinos? Using the 2024 Cooperative Election Study, a survey of 60,000 Americans, I estimated the two-party vote for Harris and Trump in every state for five groups of voters and added up the electoral votes each candidate would have won." data-es="¿Quién habría ganado la presidencia en 2024 si solo hubieran votado los blancos con título universitario? ¿O solo los latinos? Con el Cooperative Election Study 2024, una encuesta a 60,000 estadounidenses, estimé el voto bipartidista de Harris y Trump en cada estado para cinco grupos de votantes y sumé los votos electorales que habría ganado cada candidato.">Who would have won the presidency in 2024 if only white college graduates had voted? Or only Latinos? Using the 2024 Cooperative Election Study, a survey of 60,000 Americans, I estimated the two-party vote for Harris and Trump in every state for five groups of voters and added up the electoral votes each candidate would have won.</p>
+  <table class="ev">
+    <thead><tr><th data-en="If only this group voted" data-es="Si solo votara este grupo">If only this group voted</th><th>Harris</th><th>Trump</th><th data-en="Not enough data" data-es="Datos insuficientes">Not enough data</th></tr></thead>
+    <tbody>
+<tr><td data-en="White voters without a degree" data-es="Blancos sin título">White voters without a degree</td><td>84</td><td>435</td><td>19</td></tr>
+<tr><td data-en="White college graduates" data-es="Blancos con título">White college graduates</td><td>269</td><td>240</td><td>29</td></tr>
+<tr><td data-en="$100K+ family income" data-es="Ingreso de $100k o más">$100K+ family income</td><td>260</td><td>210</td><td>68</td></tr>
+<tr><td data-en="Latino voters" data-es="Latinos">Latino voters</td><td>171</td><td>54</td><td>313</td></tr>
+<tr><td data-en="Black voters" data-es="Negros">Black voters</td><td>328</td><td>0</td><td>210</td></tr>
+    </tbody>
+  </table>
+  <p class="note" data-en="Electoral votes. Maine and Nebraska are assigned whole to the statewide winner." data-es="Votos electorales. Maine y Nebraska se asignan completos al ganador estatal.">Electoral votes. Maine and Nebraska are assigned whole to the statewide winner.</p>
+  <p data-en="The education divide among white voters is the sharpest contrast. White voters without a degree would have given Trump 435 electoral votes; white college graduates would have elected Harris with 269, exactly the minimum needed, and in Wisconsin, Michigan and Ohio her lead among them is within the margin of error." data-es="La brecha por escolaridad entre votantes blancos es el contraste más fuerte. Los blancos sin título le habrían dado a Trump 435 votos electorales; los blancos con título habrían elegido a Harris con 269, justo el mínimo necesario, y en Wisconsin, Michigan y Ohio su ventaja entre ellos está dentro del margen de error.">The education divide among white voters is the sharpest contrast. White voters without a degree would have given Trump 435 electoral votes; white college graduates would have elected Harris with 269, exactly the minimum needed, and in Wisconsin, Michigan and Ohio her lead among them is within the margin of error.</p>
+  <p data-en="Unlike most maps of this kind, these do not paint every state. A state is shown in a lighter shade when the winner’s lead is not statistically significant, and in gray when the survey has fewer than 50 respondents from that group there. For Latino and Black voters, that leaves much of the map gray: a national survey cannot say how these groups voted in states where few of them live." data-es="A diferencia de la mayoría de los mapas de este tipo, estos no pintan todos los estados. Un estado aparece en tono claro cuando la ventaja del ganador no es estadísticamente significativa, y en gris cuando la encuesta tiene menos de 50 personas de ese grupo ahí. Para los votantes latinos y negros eso deja buena parte del mapa en gris: una encuesta nacional no puede decir cómo votaron estos grupos en estados donde viven pocos de ellos.">Unlike most maps of this kind, these do not paint every state. A state is shown in a lighter shade when the winner’s lead is not statistically significant, and in gray when the survey has fewer than 50 respondents from that group there. For Latino and Black voters, that leaves much of the map gray: a national survey cannot say how these groups voted in states where few of them live.</p>
+  <div class="maps">
+    <figure><img src="img/2024_only_White_Non_Grads.png" alt="Tile map: 2024 election if only white voters without a college degree voted" loading="lazy"><figcaption data-en="White voters without a college degree" data-es="Votantes blancos sin título universitario">White voters without a college degree</figcaption></figure>
+    <figure><img src="img/2024_only_White_Grads.png" alt="Tile map: 2024 election if only white college graduates voted" loading="lazy"><figcaption data-en="White college graduates" data-es="Votantes blancos con título universitario">White college graduates</figcaption></figure>
+    <figure><img src="img/2024_only_100K_Earners.png" alt="Tile map: 2024 election if only family income of $100,000 or more voted" loading="lazy"><figcaption data-en="Family income of $100,000 or more" data-es="Ingreso familiar de $100,000 o más">Family income of $100,000 or more</figcaption></figure>
+    <figure><img src="img/2024_only_Latino_Voters.png" alt="Tile map: 2024 election if only latino voters voted" loading="lazy"><figcaption data-en="Latino voters" data-es="Votantes latinos">Latino voters</figcaption></figure>
+    <figure><img src="img/2024_only_Black_Voters.png" alt="Tile map: 2024 election if only black voters voted" loading="lazy"><figcaption data-en="Black voters" data-es="Votantes negros">Black voters</figcaption></figure>
+  </div>
+  <h2 data-en="Method" data-es="Método">Method</h2>
+  <ol class="steps">
+    <li data-en="Keeps respondents whose vote in the 2024 general election is confirmed in official voter records (validated voters) and who report voting for Harris or Trump." data-es="Conserva a quienes tienen su voto en la elección general de 2024 confirmado en los registros oficiales de votantes (votantes validados) y reportan haber votado por Harris o Trump.">Keeps respondents whose vote in the 2024 general election is confirmed in official voter records (validated voters) and who report voting for Harris or Trump.</li>
+    <li data-en="Weights each response with vvweight_post, the weight the CES recommends for describing voters with post-election questions." data-es="Pondera cada respuesta con vvweight_post, el peso que el CES recomienda para describir a votantes con preguntas post-electorales.">Weights each response with vvweight_post, the weight the CES recommends for describing voters with post-election questions.</li>
+    <li data-en="Estimates Harris’s share of the two-party vote by state and group, with a standard error based on the Kish effective sample size, n = (Σw)² / Σw²." data-es="Estima la proporción de Harris en el voto bipartidista por estado y grupo, con un error estándar basado en el tamaño de muestra efectivo de Kish, n = (Σw)² / Σw².">Estimates Harris’s share of the two-party vote by state and group, with a standard error based on the Kish effective sample size, n = (Σw)² / Σw².</li>
+    <li data-en="Checks the national result: Harris gets 49.1% of the two-party vote in the survey, against about 49.2% in the official count." data-es="Revisa el resultado nacional: Harris obtiene 49.1% del voto bipartidista en la encuesta, contra cerca de 49.2% en el conteo oficial.">Checks the national result: Harris gets 49.1% of the two-party vote in the survey, against about 49.2% in the official count.</li>
+  </ol>
+  <p class="note"><span data-en="Data: Cooperative Election Study 2024 Common Content, Harvard Dataverse, " data-es="Datos: Cooperative Election Study 2024 Common Content, Harvard Dataverse, ">Data: Cooperative Election Study 2024 Common Content, Harvard Dataverse, </span><a href="https://doi.org/10.7910/DVN/X11EP6" target="_blank" rel="noopener">doi:10.7910/DVN/X11EP6</a>.</p>
+  <h2 data-en="Code" data-es="Código">Code</h2>
+  <pre class="code"><code class="language-r"># ==============================================================================
+# 2024 Presidential Election: If Only ___ Voted
+# Source: Cooperative Election Study (CES) 2024 Common Content
+#         Harvard Dataverse, doi:10.7910/DVN/X11EP6 (CC0 license)
+#
+# For each state and group calculate the bipartisan vote (Harris vs. Trump)
+# Create a map with the sum of the votes
+# Packages: readr, dplyr, ggplot2
+# ==============================================================================
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+base_dir &lt;- &quot;~/Downloads/Personal/NYT Fellowship&quot;
+data_file &lt;- file.path(base_dir, &quot;datos&quot;, &quot;CCES24_Common_OUTPUT_vv_topost_final.csv&quot;)
+output_dir &lt;- file.path(base_dir, &quot;graficas&quot;)
+dir.create(output_dir, showWarnings = FALSE)
+
+min_n &lt;- 50   # fewer cases than this in a state/group = insufficient (gray)
+# ------------------------------------------------------------------------------
+# 1. Data
+# ------------------------------------------------------------------------------
+ces &lt;- read_csv(
+  data_file,
+  col_select = c(inputstate, race, hispanic, educ, faminc_new,
+                 TS_g2024, CC24_410, vvweight_post),
+  show_col_types = FALSE
+)
+
+# Registered voters in 2024 who voted for Harris (1), Trump (2)
+# Weight: vvweight_post, CES recommendation
+voters &lt;- ces %&gt;%
+  filter(TS_g2024 %in% 1:6,
+         CC24_410 %in% c(1, 2),
+         !is.na(vvweight_post)) %&gt;%
+  mutate(harris = as.numeric(CC24_410 == 1),
+         w      = vvweight_post)
+
+# ------------------------------------------------------------------------------
+# 2. Groups
+# race:       1 White, 2 Black, 3 Hispanic or Latino
+# hispanic:   1 = Yes
+# educ:       1 No HS, 2 HS, 3 Some college, 4 2-year, 5 4-year, 6 Post-grad
+# faminc_new: 10-16 = $100,000 or more (97 = rather not say)
+# ------------------------------------------------------------------------------
+voters &lt;- voters %&gt;%
+  mutate(
+    latino       = race == 3 | hispanic %in% 1,
+    white        = race == 1 &amp; !latino,
+    college_grad = educ %in% 5:6
+  )
+
+groups &lt;- list(
+  &quot;White Non-Grads&quot; = quote(white &amp; !college_grad),
+  &quot;White Grads&quot;     = quote(white &amp; college_grad),
+  &quot;$100K+ Earners&quot;  = quote(faminc_new %in% 10:16),
+  &quot;Latino Voters&quot;   = quote(latino),
+  &quot;Black Voters&quot;    = quote(race == 2)
+)
+
+# ------------------------------------------------------------------------------
+# 3. States: FIPS, abbreviation, electoral votes in 2024, and tile position
+# (Maine and Nebraska assign all electoral votes to the statewide winner)
+# ------------------------------------------------------------------------------
+states &lt;- tribble(
+  ~fips, ~st, ~ev, ~row, ~col,
+   2, &quot;AK&quot;,  3, 1,  1,   23, &quot;ME&quot;,  4, 1, 11,
+  55, &quot;WI&quot;, 10, 2,  6,   50, &quot;VT&quot;,  3, 2, 10,   33, &quot;NH&quot;,  4, 2, 11,
+  53, &quot;WA&quot;, 12, 3,  1,   16, &quot;ID&quot;,  4, 3,  2,   30, &quot;MT&quot;,  4, 3,  3,
+  38, &quot;ND&quot;,  3, 3,  4,   27, &quot;MN&quot;, 10, 3,  5,   17, &quot;IL&quot;, 19, 3,  6,
+  26, &quot;MI&quot;, 15, 3,  7,   36, &quot;NY&quot;, 28, 3,  9,   25, &quot;MA&quot;, 11, 3, 10,
+  41, &quot;OR&quot;,  8, 4,  1,   32, &quot;NV&quot;,  6, 4,  2,   56, &quot;WY&quot;,  3, 4,  3,
+  46, &quot;SD&quot;,  3, 4,  4,   19, &quot;IA&quot;,  6, 4,  5,   18, &quot;IN&quot;, 11, 4,  6,
+  39, &quot;OH&quot;, 17, 4,  7,   42, &quot;PA&quot;, 19, 4,  8,   34, &quot;NJ&quot;, 14, 4,  9,
+   9, &quot;CT&quot;,  7, 4, 10,   44, &quot;RI&quot;,  4, 4, 11,
+   6, &quot;CA&quot;, 54, 5,  1,   49, &quot;UT&quot;,  6, 5,  2,    8, &quot;CO&quot;, 10, 5,  3,
+  31, &quot;NE&quot;,  5, 5,  4,   29, &quot;MO&quot;, 10, 5,  5,   21, &quot;KY&quot;,  8, 5,  6,
+  54, &quot;WV&quot;,  4, 5,  7,   51, &quot;VA&quot;, 13, 5,  8,   24, &quot;MD&quot;, 10, 5,  9,
+  10, &quot;DE&quot;,  3, 5, 10,
+   4, &quot;AZ&quot;, 11, 6,  2,   35, &quot;NM&quot;,  5, 6,  3,   20, &quot;KS&quot;,  6, 6,  4,
+   5, &quot;AR&quot;,  6, 6,  5,   47, &quot;TN&quot;, 11, 6,  6,   37, &quot;NC&quot;, 16, 6,  7,
+  45, &quot;SC&quot;,  9, 6,  8,   11, &quot;DC&quot;,  3, 6,  9,
+  40, &quot;OK&quot;,  7, 7,  4,   22, &quot;LA&quot;,  8, 7,  5,   28, &quot;MS&quot;,  6, 7,  6,
+   1, &quot;AL&quot;,  9, 7,  7,   13, &quot;GA&quot;, 16, 7,  8,
+  15, &quot;HI&quot;,  4, 8,  1,   48, &quot;TX&quot;, 40, 8,  4,   12, &quot;FL&quot;, 30, 8,  9
+)
+stopifnot(nrow(states) == 51, sum(states$ev) == 538)
+
+# ------------------------------------------------------------------------------
+# 4. Estimation by state and group
+# Weighted proportion of Harris in the two-party vote. The standard error uses
+# the Kish effective sample size, n_ef = (Σw)^2 / Σw^2, to reflect the loss of
+# precision from the weights.
+# ------------------------------------------------------------------------------
+estimate &lt;- function(group_name, condition) {
+  voters %&gt;%
+    filter(!!condition) %&gt;%
+    group_by(fips = inputstate) %&gt;%
+    summarise(
+      n      = n(),
+      n_ef   = sum(w)^2 / sum(w^2),
+      harris = weighted.mean(harris, w),
+      .groups = &quot;drop&quot;
+    ) %&gt;%
+    mutate(group = group_name)
+}
+
+results &lt;- bind_rows(Map(estimate, names(groups), groups)) %&gt;%
+  right_join(tidyr::expand_grid(states, group = names(groups)),
+             by = c(&quot;fips&quot;, &quot;group&quot;)) %&gt;%
+  mutate(
+    n      = coalesce(n, 0L),
+    se     = sqrt(harris * (1 - harris) / n_ef),
+    margin = 2 * harris - 1,                 # Harris - Trump, in points
+    signif = abs(harris - 0.5) &gt; 1.96 * se,
+    class  = case_when(
+      n &lt; min_n              ~ &quot;Sample too small&quot;,
+      harris &gt; 0.5 &amp; signif ~ &quot;Harris&quot;,
+      harris &gt; 0.5           ~ &quot;Lean Harris&quot;,
+      harris &lt;= 0.5 &amp; signif ~ &quot;Trump&quot;,
+      TRUE                   ~ &quot;Lean Trump&quot;
+    ),
+    class  = factor(class, levels = c(&quot;Harris&quot;, &quot;Lean Harris&quot;, &quot;Lean Trump&quot;,
+                                     &quot;Trump&quot;, &quot;Sample too small&quot;)),
+    group  = factor(group, levels = names(groups))
+  )
+
+# Electoral votes: &quot;Lean&quot; states count for the candidate above; gray ones are not assigned
+ electoral_votes &lt;- results %&gt;%
+  group_by(group) %&gt;%
+  summarise(
+    harris_ev   = sum(ev[class %in% c(&quot;Harris&quot;, &quot;Lean Harris&quot;)]),
+    trump_ev    = sum(ev[class %in% c(&quot;Trump&quot;, &quot;Lean Trump&quot;)]),
+    unassigned  = sum(ev[class == &quot;Sample too small&quot;]),
+    .groups = &quot;drop&quot;
+  )
+
+# Review: nationally, Harris&#x27;s vote should remain close to the actual result
+# (48.3% of the total, ~49.2% of the two-party vote)
+cat(&quot;Harris, two-party vote nationally (CES, weighted):&quot;,
+    round(100 * weighted.mean(voters$harris, voters$w), 1), &quot;%\n\n&quot;)
+print(electoral_votes)
+
+# ------------------------------------------------------------------------------
+# 5. Maps
+# ------------------------------------------------------------------------------
+colors &lt;- c(&quot;Harris&quot; = &quot;#2E6FD8&quot;, &quot;Lean Harris&quot; = &quot;#9DBBEB&quot;,
+            &quot;Lean Trump&quot; = &quot;#F0A39A&quot;, &quot;Trump&quot; = &quot;#D9483B&quot;,
+            &quot;Sample too small&quot; = &quot;#3A3A3A&quot;)
+
+map_plot &lt;- function(g) {
+  data &lt;- filter(results, group == g)
+  ev &lt;- filter(electoral_votes, group == g)
+
+  ggplot(data, aes(x = col, y = -row)) +
+    geom_tile(aes(fill = class), width = 0.93, height = 0.93) +
+    geom_text(aes(label = st), colour = &quot;white&quot;, size = 3.4, fontface = &quot;bold&quot;) +
+    scale_fill_manual(values = colors, drop = FALSE, name = NULL) +
+    coord_equal() +
+    labs(
+      title    = paste0(&quot;2024 Election If Only &quot;, g, &quot; Voted&quot;),
+      subtitle = paste0(&quot;Electoral votes: Harris &quot;, ev$harris_ev, &quot;  |  Trump &quot;, ev$trump_ev,
+                        if (ev$unassigned &gt; 0) paste0(&quot;  |  Not enough data &quot;, ev$unassigned)),
+      caption  = paste0(&quot;Two-party vote among validated voters. &#x27;Lean&#x27; = margin within the 95% CI; &quot;,
+                        &quot;gray = fewer than &quot;, min_n, &quot; respondents.\n&quot;,
+                        &quot;Source: Cooperative Election Study 2024 (vvweight_post). Analysis: Emilia Pintado Mariscal&quot;)
+    ) +
+    theme_void(base_size = 12) +
+    theme(
+      plot.background = element_rect(fill = &quot;black&quot;, colour = NA),
+      text            = element_text(colour = &quot;white&quot;),
+      plot.title      = element_text(face = &quot;bold&quot;, size = 18, hjust = 0.5),
+      plot.subtitle   = element_text(size = 12, hjust = 0.5, margin = margin(6, 0, 10, 0)),
+      plot.caption    = element_text(size = 7.5, colour = &quot;grey70&quot;, hjust = 0),
+      legend.position = &quot;bottom&quot;,
+      plot.margin     = margin(20, 20, 15, 20)
+    )
+}
+
+for (g in names(groups)) {
+  output_png &lt;- file.path(output_dir, paste0(&quot;2024_only_&quot;, gsub(&quot;^_|_$&quot;, &quot;&quot;, gsub(&quot;[^A-Za-z0-9]+&quot;, &quot;_&quot;, g)), &quot;.png&quot;))
+  ggsave(output_png, map_plot(g), width = 8, height = 7, dpi = 200)
+}
+
+# Full table (state × group) for the analysis text
+write_csv(results %&gt;% select(group, st, ev, n, harris, se, margin, class),
+          file.path(output_dir, &quot;2024_only_results.csv&quot;))
+</code></pre>
+</main>
+<footer class="wrap"><a href="../index.html#data" data-en="← Back to data work" data-es="← Volver a trabajo con datos">← Back to data work</a></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/r.min.js"></script>
+<script>
+hljs.highlightAll();
+(function(){
+  let lang='en'; try{const s=localStorage.getItem('lang'); if(s==='es'||s==='en') lang=s;}catch(e){}
+  function render(){
+    document.documentElement.lang=lang;
+    document.querySelectorAll('[data-en]').forEach(el=>{el.textContent=el.dataset[lang];});
+    document.querySelectorAll('[data-set-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.setLang===lang));
+  }
+  document.addEventListener('click',e=>{const l=e.target.closest('[data-set-lang]'); if(!l) return; lang=l.dataset.setLang; try{localStorage.setItem('lang',lang);}catch(err){} render();});
+  render();
+})();
+</script>
+</body>
+</html>
